@@ -16,5 +16,9 @@ for i in 0...20 do
     User.create(username: Faker::Name.unique.name, password: Faker::Alphanumeric.alpha(number: 10), age: rand(50), gender: gender, location: Faker::Address.city)
     severe = (i % 2 == 0) ? true : false
     Post.create(positive: Faker::Lorem.sentence(word_count: 3), negative: Faker::Lorem.sentence(word_count: 3), severe: severe, category: Faker::SlackEmoji.activity, user: User.all[i])
+    Comment.create(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), post: Post.all[i], user_id: User.all[rand(User.all.length)])
+    Comment.create(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), post: Post.all[i], user_id: User.all[rand(User.all.length)])
+    # Comment.create(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), post: Post.all[i])
+    # Comment.create(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), post: Post.all[i])
 end
 

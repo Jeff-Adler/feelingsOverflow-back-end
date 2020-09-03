@@ -1,13 +1,14 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :destroy, :edit]
 
+
     def index 
         posts = Post.all
         render json: posts
     end
 
     def show 
-        render json: post
+        render json: @post, include: :comments
     end
 
     def create 
@@ -20,7 +21,7 @@ class PostsController < ApplicationController
     end
 
     def update
-        post.update(post_params)
+        @post.update(post_params)
         if post.valid?
             render json: post
         else
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
     end
 
     def destroy 
-        post.destroy
+        @post.destroy
         render json: { confirmation: 'deleted!' } 
     end
 
@@ -40,7 +41,7 @@ class PostsController < ApplicationController
     end
 
     def find_post
-        post = Post.find(params[:id])
+        @post = Post.find(params[:id])
     end
 
 end
