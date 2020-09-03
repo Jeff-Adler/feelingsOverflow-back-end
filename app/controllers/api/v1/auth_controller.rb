@@ -1,13 +1,13 @@
 class Api::V1::AuthController < ApplicationController
-
     skip_before_action :authorized, only: [:create]
+    #this blocks 422 error. Necessary because Rails app generated without -api flag
+    skip_before_action :verify_authenticity_token
 
     def profile
         render json: { user: UserSerializer.new(current_user) }, status: :accepted
     end
 
     def create
-      byebug
       @user = User.find_by(username: user_login_params[:username])
       #User#authenticate comes from BCrypt
       if @user && @user.authenticate(user_login_params[:password])

@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
     skip_before_action :authorized, only: [:create]
-    #this blocks the 422 error, but is not secure
+    #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
  
     def create
