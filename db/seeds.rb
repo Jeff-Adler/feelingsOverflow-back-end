@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+User.destroy_all
+Post.destroy_all
+Comment.destroy_all
+
+for i in 0...20 do
+    gender = (i % 2 == 0) ? "male" : "female"
+    User.create(username: Faker::Name.unique.name, password: Faker::Alphanumeric.alpha(number: 10), age: rand(50), gender: gender, location: Faker::Address.city)
+    severe = (i % 2 == 0) ? true : false
+    Post.create(positive: Faker::Lorem.sentence(word_count: 3), negative: Faker::Lorem.sentence(word_count: 3), severe: severe, category: Faker::SlackEmoji.activity, user: User.all[i])
+end
+
