@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_204531) do
     t.string "comment"
     t.integer "rating"
     t.bigint "post_id", null: false
-    t.bigint "commenter_id", null: false
+    t.bigint "commenter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_204531) do
     t.string "negative"
     t.boolean "severe"
     t.string "category"
-    t.bigint "poster_id", null: false
+    t.bigint "poster_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["poster_id"], name: "index_posts_on_poster_id"

@@ -1,20 +1,19 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :destroy, :update]
 
-
     def index 
         posts = Post.all
-        render json: posts
+        render json: posts.to_json
     end
 
     def show 
-        render json: @post, include: :comments
+        render json: @post.to_json, include: :comments
     end
 
     def create 
         post = Post.create(post_params)
         if post.valid?
-            render json: post, status: :created
+            render json: post.to_json, status: :created
         else
             render json: { error: 'failed to create post' }, status: :not_acceptable
         end
@@ -22,8 +21,8 @@ class PostsController < ApplicationController
 
     def update
         @post.update(post_params)
-        if post.valid?
-            render json: post
+        if @post.valid?
+            render json: @post.to_json
         else
             render json: { error: 'failed to edit post' }, status: :not_acceptable
         end
