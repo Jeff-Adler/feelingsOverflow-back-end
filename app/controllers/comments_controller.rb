@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
     before_action :find_comment, only: [:destroy, :update]
+    #this blocks 422 error. Necessary because Rails app generated without -api flag
+    skip_before_action :verify_authenticity_token
 
     def create 
         comment = Comment.create(comment_params)
@@ -27,7 +29,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:comment, :rating, :post, :user) #may need to swap :user with :user_id
+        params.require(:comment).permit(:comment, :rating, :post, :commenter) #may need to swap :user with :user_id
     end
 
     def find_comment

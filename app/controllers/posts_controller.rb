@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :destroy, :update]
+    #this blocks 422 error. Necessary because Rails app generated without -api flag
+    skip_before_action :verify_authenticity_token
 
     def index 
         posts = Post.all
@@ -11,6 +13,7 @@ class PostsController < ApplicationController
     end
 
     def create 
+        byebug
         post = Post.create(post_params)
         if post.valid?
             render json: post.to_json, status: :created
@@ -36,7 +39,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:postive, :negative, :severe, :category, :poster)
+        params.require(:post).permit(:positive, :negative, :severe, :category, :poster_id)
     end
 
     def find_post
