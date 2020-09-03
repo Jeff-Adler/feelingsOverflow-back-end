@@ -13,8 +13,8 @@ class PostsController < ApplicationController
     end
 
     def create 
-        byebug
         post = Post.create(post_params)
+        byebug
         if post.valid?
             render json: post.to_json, status: :created
         else
