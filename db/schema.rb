@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(version: 2020_09_02_204531) do
     t.string "comment"
     t.integer "rating"
     t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "commenter_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["commenter_id"], name: "index_comments_on_commenter_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 2020_09_02_204531) do
     t.string "negative"
     t.boolean "severe"
     t.string "category"
-    t.bigint "user_id", null: false
+    t.bigint "poster_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["poster_id"], name: "index_posts_on_poster_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,6 +48,6 @@ ActiveRecord::Schema.define(version: 2020_09_02_204531) do
   end
 
   add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
-  add_foreign_key "posts", "users"
+  add_foreign_key "comments", "users", column: "commenter_id"
+  add_foreign_key "posts", "users", column: "poster_id"
 end
