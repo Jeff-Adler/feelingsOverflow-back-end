@@ -43,3 +43,5 @@
 # `ActiveRecord::Relation` changes by moving the volatile information (max updated at and count)
 # of the relation's cache key into the cache version to support recycling cache key.
 # Rails.application.config.active_record.collection_cache_versioning = true
+
+Rails.application.config.active_record.belongs_to_required_by_default = false
