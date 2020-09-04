@@ -3,6 +3,11 @@ class CommentsController < ApplicationController
     #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
 
+    def index
+        comments = Comment.all
+        render json: comments.to_json
+    end
+
     def create 
         comment = Comment.create(comment_params)
         if comment.valid?

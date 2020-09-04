@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'posts/:id/comments', to: 'posts#getComments'
+
   resources :comments
 
   # get '/posts' to 'posts#index'

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :find_post, only: [:show, :destroy, :update]
+    before_action :find_post, only: [:show, :destroy, :update, :getComments]
     #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
 
@@ -34,6 +34,10 @@ class PostsController < ApplicationController
     def destroy 
         @post.destroy
         render json: { confirmation: 'deleted!' } 
+    end
+
+    def getComments
+        render json: @post.comments.to_json
     end
 
     private
