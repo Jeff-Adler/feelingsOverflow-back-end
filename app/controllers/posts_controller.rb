@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:positive, :negative, :severe, :category, :poster_id)
+        params.require(:post).permit(:positive, :negative, :severe, :category)
     end
 
     def find_post
