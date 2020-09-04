@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-User.destroy_all
-Post.destroy_all
-Comment.destroy_all
+# User.destroy_all
+# Post.destroy_all
+# Comment.destroy_all
 
 for i in 0...20 do
     gender = (i % 2 == 0) ? "male" : "female"
@@ -18,5 +18,10 @@ for i in 0...20 do
     post = Post.create!(positive: Faker::Lorem.sentence(word_count: 3), negative: Faker::Lorem.sentence(word_count: 3), severe: severe, category: Faker::SlackEmoji.activity, poster_id: user.id)
     Comment.create!(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), post: post, commenter_id: user.id)
     Comment.create!(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), post: post, commenter_id: user.id)
+end
+
+Post.all.each do |post|
+    post.comments.create(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), commenter_id: User.all.first.id)
+    post.comments.create(comment: Faker::Lorem.sentence(word_count: 3), rating:rand(1..5), commenter_id: User.all.first.id)
 end
 
