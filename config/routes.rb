@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   get 'posts/:id/comments', to: 'posts#getComments'
+  get 'users/:id/posts', to: 'posts#my_posts'
+
 
   resources :comments
   resources :posts

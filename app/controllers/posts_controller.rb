@@ -40,6 +40,11 @@ class PostsController < ApplicationController
         render json: @post.comments.to_json
     end
 
+    def my_posts
+        user = User.find(params[:id])
+        render json: user.posts.to_json
+      end
+
     private
 
     def post_params
