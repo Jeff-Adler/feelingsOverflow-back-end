@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :find_post, only: [:show, :destroy, :update, :getComments]
+    before_action :find_post, only: [:show, :destroy, :update, :getComments, :createComment]
     #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
 
