@@ -42,7 +42,9 @@ class PostsController < ApplicationController
 
     def my_posts
         user = User.find(params[:id])
-        render json: user.posts.to_json
+        posts = user.posts
+        posts = posts.sort_by{ |post| [post.created_at, post.updated_at].max }.reverse!
+        render json: posts.to_json
       end
 
     private
