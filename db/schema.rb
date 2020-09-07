@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_214511) do
+ActiveRecord::Schema.define(version: 2020_09_07_222322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.string "comment"
-    t.integer "rating"
+    t.integer "votes"
     t.bigint "post_id", null: false
-    t.bigint "commenter_id"
+    t.bigint "commenter_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
@@ -27,14 +27,20 @@ ActiveRecord::Schema.define(version: 2020_09_06_214511) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "positive"
-    t.string "negative"
-    t.boolean "severe"
-    t.string "category"
-    t.bigint "poster_id"
+    t.bigint "poster_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "poster_name"
+    t.string "mood_rating"
+    t.string "mood_length"
+    t.string "mood_location"
+    t.string "mood_trigger"
+    t.string "mood_trigger_detail"
+    t.string "mood_description"
+    t.string "mood_purpose"
+    t.string "mood_title"
+    t.string "mood_category"
+    t.string "mood_category_detail"
     t.index ["poster_id"], name: "index_posts_on_poster_id"
   end
 

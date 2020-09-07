@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:positive, :negative, :severe, :category,:poster_name)
+        params.require(:post).permit(:mood_rating, :mood_length, :mood_location, :mood_trigger, :mood_trigger_detail, :mood_description, :mood_purpose, :mood_title, :mood_category, :mood_category_detail, :poster_name)
     end
 
     def find_post
@@ -58,3 +58,4 @@ class PostsController < ApplicationController
     end
 
 end
+
