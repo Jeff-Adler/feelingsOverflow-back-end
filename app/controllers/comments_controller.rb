@@ -18,11 +18,11 @@ class CommentsController < ApplicationController
     end
 
     def update
-        @comment.update(post_params)
-        if post.valid?
-            render json: post
+        @comment.update(comment_params)
+        if @comment.valid?
+            render json: @comment.to_json
         else
-            render json: { error: 'failed to edit post' }, status: :not_acceptable
+            render json: { error: 'failed to edit comment' }, status: :not_acceptable
         end
     end
 
@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:comment, :post_id) 
+        params.require(:comment).permit(:comment, :votes, :post_id) 
     end
 
     def find_comment
