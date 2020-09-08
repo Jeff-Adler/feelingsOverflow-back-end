@@ -37,6 +37,9 @@ class PostsController < ApplicationController
     end
 
     def getComments
+        @post.comments.each do |comment|
+            comment.tally_votes
+        end
         render json: @post.comments.to_json
     end
 
@@ -45,7 +48,7 @@ class PostsController < ApplicationController
         posts = user.posts
         posts = posts.sort_by{ |post| [post.created_at, post.updated_at].max }.reverse!
         render json: posts.to_json
-      end
+    end
 
     private
 

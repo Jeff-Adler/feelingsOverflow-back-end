@@ -6,9 +6,10 @@ class Comment < ApplicationRecord
 
   def tally_votes
     votes = self.votes
-    upvotes = votes.select do |vote|
-      vote.upvote == true
+    downvotes = votes.select do |vote|
+      vote.upvote == false
     end
-    upvotes.length
+    self.update(vote_tally: votes.length - downvotes.length)
   end
+
 end
