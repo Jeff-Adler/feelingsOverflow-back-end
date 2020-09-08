@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :votes
   get 'posts/:id/comments', to: 'posts#getComments'
   get 'users/:id/posts', to: 'posts#my_posts'
 
