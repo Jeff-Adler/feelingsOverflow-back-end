@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_222322) do
     t.string "comment"
     t.integer "votes"
     t.bigint "post_id", null: false
-    t.bigint "commenter_id", null: false
+    t.bigint "commenter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_222322) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.bigint "poster_id", null: false
+    t.bigint "poster_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "poster_name"
