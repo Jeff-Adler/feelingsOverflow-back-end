@@ -3,9 +3,13 @@ class VotesController < ApplicationController
     skip_before_action :verify_authenticity_token
     
     def create 
-        vote = current_user.votes.create(vote_params)
+        comment = Comment.find(params[:id])
+        vote = comment.votes.build(vote_params)
+        user = current_user
+        vote.voter_id = user.id
+        vote.save
         if vote.valid?
-            render json: vote.to_json, status: :created
+            render json: comment.to_json, status: :created
         else
             render json: { error: 'failed to create vote' }, status: :not_acceptable
         end
@@ -14,7 +18,7 @@ class VotesController < ApplicationController
     private
 
     def vote_params
-        params.require(:vote).permit(:comment_id,:upvote)
+        params.require(:vote).permit(:upvote)
     end
 
 end
