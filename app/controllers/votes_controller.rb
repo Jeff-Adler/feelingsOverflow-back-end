@@ -9,6 +9,7 @@ class VotesController < ApplicationController
         vote.voter_id = user.id
         vote.save
         if vote.valid?
+            comment.tally_votes
             render json: comment.to_json, status: :created
         else
             render json: { error: 'failed to create vote' }, status: :not_acceptable
