@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_222322) do
+ActiveRecord::Schema.define(version: 2020_09_08_210937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.string "comment"
-    t.integer "votes"
     t.bigint "post_id", null: false
     t.bigint "commenter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "vote_tally"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
@@ -54,7 +54,19 @@ ActiveRecord::Schema.define(version: 2020_09_07_222322) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.bigint "voter_id", null: false
+    t.bigint "comment_id", null: false
+    t.boolean "upvote"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_votes_on_comment_id"
+    t.index ["voter_id"], name: "index_votes_on_voter_id"
+  end
+
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users", column: "commenter_id"
   add_foreign_key "posts", "users", column: "poster_id"
+  add_foreign_key "votes", "comments"
+  add_foreign_key "votes", "users", column: "voter_id"
 end

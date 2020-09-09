@@ -10,7 +10,5 @@ class AddColumnsToPost < ActiveRecord::Migration[6.0]
     add_column :posts, :mood_title, :string
     add_column :posts, :mood_category, :string
     add_column :posts, :mood_category_detail, :string
-
-
   end
 end
