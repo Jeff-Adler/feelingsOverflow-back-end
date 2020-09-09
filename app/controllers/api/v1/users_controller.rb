@@ -3,6 +3,10 @@ class Api::V1::UsersController < ApplicationController
     #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
 
+    def index
+      render json: User.all.to_json
+    end
+
     def profile
       render json: { user: UserSerializer.new(current_user) }, status: :accepted
     end
