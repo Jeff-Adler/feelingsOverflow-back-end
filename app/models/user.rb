@@ -9,5 +9,44 @@ class User < ApplicationRecord
     has_many :voted_comments, through: :votes, source: :comment
     has_secure_password
     validates :username, uniqueness: { case_sensitive: false }
+
+    def total_upvotes
+        upvotes = self.votes.select do |vote|
+            vote.upvote == true
+        end
+        upvotes.length
+    end
+
+    def total_downvotes
+        downvotes = self.votes.select do |vote|
+            vote.upvote == false
+        end
+        downvotes.length
+    end
+
+    def most_popular_comment
+        most_popular_comment = self.comments.max_by do |comment|
+            comment.tally_votes
+        end
+        most_popular_comment
+    end
+
+    def most_commented_post
+        most_commented_post = self.posts.max_by do |post|
+            post.comments.length
+        end
+        most_commented_post
+    end
+
+    def user_analytics
+        analytics = [
+            {:signup_date => self.created_at},
+            {:total_comments => self.comments.length},
+            {:total_upvotes => self.total_upvotes},
+            {:total_downvotes => self.total_downvotes},
+            {:most_popular_comment => self.most_popular_comment},
+            {:most_commented_post => self.most_commented_post}
+    ]
+    end
 end
 

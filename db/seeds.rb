@@ -14,7 +14,7 @@ Vote.destroy_all
 
 for i in 0...20 do
     gender = (i % 2 == 0) ? "male" : "female"
-    user = User.create!(username: Faker::Name.unique.name, password: Faker::Alphanumeric.alpha(number: 10), age: rand(50), gender: gender, location: Faker::Address.city)
+    user = User.create!(username: Faker::Name.unique.name, password: Faker::Alphanumeric.alpha(number: 10), birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), gender: gender, location: Faker::Address.city)
     severe = (i % 2 == 0) ? true : false
     
     post = Post.create!(mood_rating: Faker::Lorem.sentence(word_count: 3), mood_length: Faker::Lorem.sentence(word_count: 3), mood_location: Faker::Lorem.sentence(word_count: 3), 

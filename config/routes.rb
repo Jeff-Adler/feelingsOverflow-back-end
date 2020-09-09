@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'posts/:id/comments', to: 'posts#getComments'
   get 'users/:id/posts', to: 'posts#my_posts'
   get 'users/:id/voted_comments', to: 'votes#voted_comments'
+  get 'users/:id/analytics', to: 'api/v1/users#retrieve_user_analytics'
 
   resources :votes
   resources :comments
