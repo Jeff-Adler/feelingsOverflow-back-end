@@ -16,8 +16,8 @@ class VotesController < ApplicationController
         end
     end
 
-    def my_votes
-        render json: current_user.votes.to_json
+    def voted_comments
+        render json: current_user.voted_comments.to_json
     end
 
     private
