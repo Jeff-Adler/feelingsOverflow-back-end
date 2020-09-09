@@ -16,10 +16,25 @@ class Api::V1::UsersController < ApplicationController
         render json: { error: 'failed to create user' }, status: :not_acceptable
         end
     end
+
+
+    def update
+      @user.update(user_edit_params)
+      if @user.valid?
+          render json: @user.to_json
+      else
+          render json: { error: 'failed to edit user' }, status: :not_acceptable
+      end
+  end
      
     private
     
       def user_params
         params.require(:user).permit(:username, :password, :age, :gender, :location)
       end
+
+      def user_edit_params
+        params.require(:user).permit(:age, :gender, :location)
+      end
+
 end
