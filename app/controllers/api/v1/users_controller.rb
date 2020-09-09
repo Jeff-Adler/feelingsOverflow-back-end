@@ -18,23 +18,28 @@ class Api::V1::UsersController < ApplicationController
     end
 
 
-    def update
-      @user.update(user_edit_params)
-      if @user.valid?
-          render json: @user.to_json
-      else
-          render json: { error: 'failed to edit user' }, status: :not_acceptable
-      end
+  def update
+    @user.update(user_edit_params)
+    if @user.valid?
+        render json: @user.to_json
+    else
+        render json: { error: 'failed to edit user' }, status: :not_acceptable
+    end
+  end
+
+  def retrieve_user_analytics
+    user = User.find(params[:id])
+    render json: user.user_analytics.to_json
   end
      
     private
     
-      def user_params
-        params.require(:user).permit(:username, :password, :birthdate, :gender, :location)
-      end
+  def user_params
+    params.require(:user).permit(:username, :password, :birthdate, :gender, :location)
+  end
 
-      def user_edit_params
-        params.require(:user).permit(:birthdate, :gender, :location)
-      end
+  def user_edit_params
+    params.require(:user).permit(:birthdate, :gender, :location)
+  end
 
 end
