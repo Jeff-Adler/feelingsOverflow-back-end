@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_09_08_210937) do
   create_table "comments", force: :cascade do |t|
     t.string "comment"
     t.bigint "post_id", null: false
-    t.bigint "commenter_id"
+    t.bigint "commenter_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "vote_tally"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_09_08_210937) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.bigint "poster_id"
+    t.bigint "poster_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "poster_name"
