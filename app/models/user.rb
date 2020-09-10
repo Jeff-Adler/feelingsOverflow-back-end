@@ -9,6 +9,7 @@ class User < ApplicationRecord
     has_many :voted_comments, through: :votes, source: :comment
     has_secure_password
     validates :username, uniqueness: { case_sensitive: false }
+    validates :username, :password, length: { in: 6..20 }
 
     def total_upvotes
         upvotes = self.votes.select do |vote|

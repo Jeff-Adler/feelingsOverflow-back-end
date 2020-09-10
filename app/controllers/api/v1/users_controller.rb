@@ -3,6 +3,10 @@ class Api::V1::UsersController < ApplicationController
     #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
 
+    def index
+      render json: User.all.to_json
+    end
+
     def profile
       render json: { user: UserSerializer.new(current_user) }, status: :accepted
     end
@@ -13,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
         @token = encode_token(user_id: @user.id)
         render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
         else
-        render json: { error: 'failed to create user' }, status: :not_acceptable
+        render json: @user.errors.full_messages, status: :not_acceptable
         end
     end
 
@@ -23,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.valid?
         render json: @user.to_json
     else
-        render json: { error: 'failed to edit user' }, status: :not_acceptable
+        render json: { error: 'Failed to edit user' }, status: :not_acceptable
     end
   end
 
