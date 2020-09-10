@@ -21,14 +21,12 @@ class Api::V1::UsersController < ApplicationController
         end
     end
 
-
   def update
-    @user.update(user_edit_params)
-    if @user.valid?
-        render json: @user.to_json
-    else
-        render json: { error: 'Failed to edit user' }, status: :not_acceptable
-    end
+    user = User.find(params[:id])
+    user.update_attribute(:birthdate, user_edit_params[:birthdate])
+    user.update_attribute(:gender, user_edit_params[:gender])
+    user.update_attribute(:location, user_edit_params[:location])
+    render json: { user: UserSerializer.new(user)}
   end
 
   def retrieve_user_analytics
