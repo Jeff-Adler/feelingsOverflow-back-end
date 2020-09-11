@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     def update
         @post.update(post_params)
         if @post.valid?
-            render json: @post.to_json
+            render json: current_user.posts.to_json
         else
             render json: { error: 'failed to edit post' }, status: :not_acceptable
         end
@@ -42,13 +42,6 @@ class PostsController < ApplicationController
         end
         render json: @post.comments.to_json
     end
-
-    # def my_posts
-    #     user = User.find(params[:id])
-    #     posts = user.posts
-    #     posts = posts.sort_by{ |post| [post.created_at, post.updated_at].max }.reverse!
-    #     render json: posts.to_json
-    # end
 
     private
 
