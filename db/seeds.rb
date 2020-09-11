@@ -85,6 +85,13 @@ poster_id: user2.id, poster_name: user2.username)
 post3.comments.create!(comment: "062220 is best cohort ever!" , commenter_id: user3.id)
 post3.comments.create!(comment: "I never really liked that Jeff guy much.", commenter_id: user2.id)
 
+post5 = Post.create!(mood_rating: "Awesome!", mood_length: "Just today", mood_location: "In Konoha",
+mood_trigger: "Yes", mood_trigger_detail: "Seeing my pupil succeed!", 
+mood_description: "So f-ing proud of my pupil Uzumaki Naruto for successfully executing the legendary Rasengan technique!", 
+mood_purpose: "Give Support", mood_title: "Nothing like the feeling of teaching others.", 
+mood_category: "Relationships", mood_category_detail: "", 
+poster_id: user5.id, poster_name: user5.username)
+
 Comment.all.each do |comment|
     comment.votes.create!(voter_id: User.all.first.id, upvote: true)
     comment.votes.create!(voter_id: User.all.last.id, upvote: false)
