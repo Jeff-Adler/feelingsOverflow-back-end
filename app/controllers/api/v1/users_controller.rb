@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
     skip_before_action :authorized, only: [:create]
     #this blocks 422 error. Necessary because Rails app generated without -api flag
     skip_before_action :verify_authenticity_token
-    before_action :find_user, only: [:update,:retrieve_user_posts,:retrieve_user_analytics]
+    before_action :find_user, only: [:update,:retrieve_user_posts,:retrieve_user_analytics,:voted_comments]
 
     def index
       render json: User.all.to_json
@@ -30,11 +30,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def retrieve_user_posts
-    render json: @user.posts.to_json
+    posts = @user.posts
+    posts = posts.sort_by{ |post| [post.created_at, post.updated_at].max }.reverse!
+    render json: posts.to_json
   end
 
   def retrieve_user_analytics
     render json: @user.user_analytics.to_json
+  end
+
+  def voted_comments
+    render json: @user.voted_comments.to_json
   end
      
     private
