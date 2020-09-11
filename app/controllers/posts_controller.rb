@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
     def destroy 
         @post.destroy
-        render json: { confirmation: 'deleted!' } 
+        render json: current_user.posts.to_json
     end
 
     def getComments
