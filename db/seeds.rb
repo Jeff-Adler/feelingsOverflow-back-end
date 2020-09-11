@@ -50,17 +50,23 @@ poster_id: user1.id, poster_name: user1.username)
 post1.comments.create!(comment: "Amazing man! So easy for one small setback to take us off track. Glad you hopped back on!" , commenter_id: user2.id)
 post1.comments.create!(comment: "Major props, brother.", commenter_id: user3.id)
 
+post2 = Post.create!(mood_rating: "Doing okay", mood_length: "A few weeks", mood_location: "In Marching Band Practice",
+mood_trigger: "Yes", mood_trigger_detail: "Meeting new people", 
+mood_description: "It's almost hard to admit, but the happiest part of every school year is marching band season.
+I love my friends, but there's something special about connecting with people who I would NEVER talk to, if we weren't
+band-mates.", mood_purpose: "Give Support", mood_title: "Why I March.", 
+mood_category: "School", mood_category_detail: "aker::Lorem.sentence(word_count: 3)", 
+poster_id: user1.id, poster_name: user1.username)
+
+post2.comments.create!(comment: "Ha, even though I graduated high school 15 years ago, my fondest memories are still from marching band." , commenter_id: user2.id)
+post2.comments.create!(comment: "I feel you, dude. That's the only reason I did sports in high school, the camaraderie.", commenter_id: user3.id)
+
 Comment.all.each do |comment|
     comment.votes.create!(voter_id: User.all.first.id, upvote: true)
     comment.votes.create!(voter_id: User.all.last.id, upvote: false)
+    comment.votes.create!(voter_id: User.all.first.id, upvote: true)
+    comment.votes.create!(voter_id: User.all.last.id, upvote: false)
 end
-
-# post2 = Post.create!(mood_rating: "Doing okay", mood_length: "A few weeks", mood_location: "In Marching Band Practice",
-# mood_trigger: "Yes", mood_trigger_detail: "Meeting new people", 
-# mood_description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4), 
-# mood_purpose: Faker::Lorem.sentence(word_count: 3), mood_title: Faker::Lorem.sentence(word_count: 1), 
-# mood_category: Faker::SlackEmoji.activity, mood_category_detail: Faker::Lorem.sentence(word_count: 3), 
-# poster_id: user1.id, poster_name: user1.username)
 
 # post3 = Post.create!(mood_rating: "A little down", mood_length: "1-6 months", mood_location: "In my room",
 # mood_trigger: "No", mood_trigger_detail: "", 
