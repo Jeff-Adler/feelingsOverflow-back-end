@@ -26,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
     @user.update_attribute(:birthdate, user_edit_params[:birthdate])
     @user.update_attribute(:gender, user_edit_params[:gender])
     @user.update_attribute(:location, user_edit_params[:location])
-    render json: { user: UserSerializer.new(user)}
+    render json: { user: UserSerializer.new(@user)}
   end
 
   def retrieve_user_posts
