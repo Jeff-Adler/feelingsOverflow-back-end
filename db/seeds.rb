@@ -14,15 +14,6 @@ MOOD_RATING = [
     "Having a hard time"
 ]
 
-MOOD_LOCATION = [
-    "At home",
-    "At school",
-    "Traveling",
-    "With my friends",
-    "With my family",
-    "With my loved one"
-]
-
 MOOD_LENGTH = [
     "Just today",
     "A few days",
@@ -30,6 +21,16 @@ MOOD_LENGTH = [
     "1-6 months",
     "6-12 months",
     "Over a year"
+]
+
+MOOD_LOCATION = [
+    "At home",
+    "At school",
+    "At work",
+    "Traveling",
+    "With my friends",
+    "With my family",
+    "With my loved one"
 ]
 
 MOOD_CATEGORY = [
@@ -53,36 +54,36 @@ for i in 1..5 do
 end
 
 Post.create!(
-    mood_rating: MOOD_RATING[rand(0..MOOD_RATING-1)], 
-    mood_length: MOOD_LENGTH[rand(0..MOOD_LENGTH-1)], 
-    mood_location: MOOD_LOCATION[rand(0..MOOD_LOCATION-1)], 
-    mood_trigger: "No" ,
-    mood_trigger_detail: "", 
-    mood_description: "I made the case for higher pay months ago and a raise finally came through", 
-    mood_purpose: "Give Support",  #binary
+    mood_rating: MOOD_RATING[0], 
+    mood_length: MOOD_LENGTH[0], 
+    mood_location: MOOD_LOCATION[2], 
+    mood_trigger: "Yes" ,
+    mood_trigger_detail: "Finally got rewarded for my hard work.", 
+    mood_description: "I made the case for higher pay months ago and a raise finally came through!", 
+    mood_purpose: "Give Support", 
     mood_title: "Got a raise!", 
-    mood_category: MOOD_LENGTH[rand(0..MOOD_LENGTH-2)], 
+    mood_category: MOOD_LENGTH[0], 
     mood_category_detail: "", 
     poster_id: user.id, 
     poster_name: user.username
 )
 
-for User.all.each do |user|
-    Post.create!(
-        mood_rating: MOOD_RATING[rand(0..MOOD_RATING-1)], 
-        mood_length: MOOD_LENGTH[rand(0..MOOD_LENGTH-1)], 
-        mood_location: MOOD_LOCATION[rand(0..MOOD_LOCATION-1)], 
-        mood_trigger: "No" ,
-        mood_trigger_detail: "", 
-        mood_description: "I made the case for higher pay months ago and a raise finally came through", 
-        mood_purpose: "Give Support",  #binary
-        mood_title: "Got a raise!", 
-        mood_category: MOOD_LENGTH[rand(0..MOOD_LENGTH-2)], 
-        mood_category_detail: "", 
-        poster_id: user.id, 
-        poster_name: user.username
-    )
-end
+# for User.all.each do |user|
+#     Post.create!(
+#         mood_rating: MOOD_RATING[rand(0..MOOD_RATING-1)], 
+#         mood_length: MOOD_LENGTH[rand(0..MOOD_LENGTH-1)], 
+#         mood_location: MOOD_LOCATION[rand(0..MOOD_LOCATION-1)], 
+#         mood_trigger: "No" ,
+#         mood_trigger_detail: "", 
+#         mood_description: "I made the case for higher pay months ago and a raise finally came through", 
+#         mood_purpose: "Give Support",  #binary
+#         mood_title: "Got a raise!", 
+#         mood_category: MOOD_LENGTH[rand(0..MOOD_LENGTH-2)], 
+#         mood_category_detail: "", 
+#         poster_id: user.id, 
+#         poster_name: user.username
+#     )
+# end
 
 
 
