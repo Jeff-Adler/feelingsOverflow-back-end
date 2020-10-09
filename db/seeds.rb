@@ -150,9 +150,59 @@ band-mates.",
 post5.comments.create!(comment: "Ha, even though I graduated high school 15 years ago, my fondest memories are still from marching band." , commenter_id: User.all[rand(0..User.all.length - 2)])
 post5.comments.create!(comment: "I feel you, dude. That's the only reason I did sports in high school, the camaraderie.", commenter_id: User.all[rand(0..User.all.length - 2)])
 
+post6 = Post.create!(
+    mood_rating: "A little down", 
+    mood_length: "A few weeks", 
+    mood_location: "At school",
+    mood_trigger: "Yes", 
+    mood_trigger_detail: "English class", 
+    mood_description: "I really love reading, and love the idea of analyzing texts and learning from them, but I never seem
+    to catch these metaphors we have to discuss in English class. I wish we could read fantasy
+    or sci-fi or even history. The books we read ruins my interest in the one subject I love.", 
+    mood_purpose: "Get Support", 
+    mood_title: "Why can't English class be fun?", 
+    mood_category: "School", 
+    mood_category_detail: "", 
+    poster_id: User.all[0].id, 
+    poster_name: User.all[0].username
+)
+
+post6.comments.create!(comment: "Agreed. Once you graduate though, you can read whatever you want." , commenter_id: User.all[rand(1..User.all.length - 2)])
+
+post7 = Post.create!(
+    mood_rating: "Having a hard time", 
+    mood_length: "Over a year", 
+    mood_location: "Relationships", 
+    mood_trigger: "Yes", 
+    mood_trigger_detail: "Hanging out with friends", 
+    mood_description: "I've had the same friends since Kindergarten, but recently I just
+    feel unable to relate to them. We've always had fun as the too-cool-for-school slackers,
+    but now I want to exercise and do things that actually bring me joy. But, they're just not
+    onboard.", 
+    mood_purpose: "Get Support", 
+    mood_title: "Drifting away from my friends", 
+    mood_category: "Relationships", 
+    mood_category_detail: "", 
+    poster_id: User.all[4].id, 
+    poster_name: User.all[4].username
+)
+
+post7.comments.create!(comment: "Relationships come and go. It's part of life. Don't sweat it too much." , commenter_id: User.all[1])
+
 #Seed Votes
 Comment.all.each do |comment|
-    comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
-    comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: false)
-    comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+    rand_number = rand(0..2)
+    if rand_number == 0
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: false)
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+    elsif rand_number == 1
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: false)
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: false)
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+    else
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+        comment.votes.create!(voter_id: User.all[rand(0..User.all.length - 1)].id, upvote: true)
+    end
 end
