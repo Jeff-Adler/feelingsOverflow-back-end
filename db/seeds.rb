@@ -62,10 +62,25 @@ Post.create!(
     mood_description: "I made the case for higher pay months ago and a raise finally came through!", 
     mood_purpose: "Give Support", 
     mood_title: "Got a raise!", 
-    mood_category: MOOD_LENGTH[0], 
+    mood_category: MOOD_CATEGORY[1], 
     mood_category_detail: "", 
-    poster_id: user.id, 
-    poster_name: user.username
+    poster_id: User.all[0].id, 
+    poster_name: User.all[0].username
+)
+
+Post.create!(
+    mood_rating: MOOD_RATING[3], 
+    mood_length: MOOD_LENGTH[4], 
+    mood_location: MOOD_LOCATION[3], 
+    mood_trigger: "Yes" ,
+    mood_trigger_detail: "Skipping sports practice to play games with friends.", 
+    mood_description: "My parents don't understand my love of video games", 
+    mood_purpose: "Get Support", 
+    mood_title: "My parents don't understand me.", 
+    mood_category: MOOD_CATEGORY[0], 
+    mood_category_detail: "", 
+    poster_id: User.all[1].id, 
+    poster_name: User.all[1].id, 
 )
 
 # for User.all.each do |user|
