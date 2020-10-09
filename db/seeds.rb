@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
 User.destroy_all
@@ -12,27 +5,87 @@ Post.destroy_all
 Comment.destroy_all
 Vote.destroy_all
 
-# for i in 0...20 do
-#     gender = (i % 2 == 0) ? "male" : "female"
-#     user = User.create!(username: Faker::Name.unique.name, password: Faker::Alphanumeric.alpha(number: 10), birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), gender: gender, location: Faker::Address.city)
-#     severe = (i % 2 == 0) ? true : false
-    
-#     post = Post.create!(mood_rating: Faker::Lorem.sentence(word_count: 3), mood_length: Faker::Lorem.sentence(word_count: 3), mood_location: Faker::Lorem.sentence(word_count: 3), 
-#     mood_trigger: Faker::Lorem.sentence(word_count: 3), mood_trigger_detail: Faker::Lorem.sentence(word_count: 3), mood_description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4), mood_purpose: Faker::Lorem.sentence(word_count: 3), mood_title: Faker::Lorem.sentence(word_count: 1), mood_category: Faker::SlackEmoji.activity, mood_category_detail: Faker::Lorem.sentence(word_count: 3), poster_id: user.id, poster_name: user.username)
-    
-#     Comment.create(comment: Faker::Lorem.sentence(word_count: 3), post: post, commenter_id: user.id)
-#     Comment.create(comment: Faker::Lorem.sentence(word_count: 3), post: post, commenter_id: user.id)
-# end
+MOOD_RATING = [
+    "Awesome!",
+    "Pretty good",
+    "Doing okay",
+    "A little down",
+    "Could be better",
+    "Having a hard time"
+]
 
-# Post.all.each do |post|
-#     post.comments.create(comment: Faker::Lorem.sentence(word_count: 3), commenter_id: User.all.first.id)
-#     post.comments.create(comment: Faker::Lorem.sentence(word_count: 3), commenter_id: User.all.first.id)
-# end
+MOOD_LOCATION = [
+    "At home",
+    "At school",
+    "Traveling",
+    "With my friends",
+    "With my family",
+    "With my loved one"
+]
 
-# Comment.all.each do |comment|
-#     comment.votes.create!(voter_id: User.all.first.id, upvote: true)
-#     comment.votes.create!(voter_id: User.all.last.id, upvote: false)
-# end
+MOOD_LENGTH = [
+    "Just today",
+    "A few days",
+    "A few weeks",
+    "1-6 months",
+    "6-12 months",
+    "Over a year"
+]
+
+MOOD_CATEGORY = [
+    "Family",
+    "Work",
+    "School",
+    "Friends",
+    "Relationships",
+    "Self-confidence",
+    "Other"
+]
+
+for i in 1..5 do 
+    User.create!(
+        username: Faker::Internet.unique.username(specifier: 7..19), 
+        password: Faker::Alphanumeric.alpha(number: 10), 
+        birthdate: Faker::Date.birthday(min_age: 22, max_age: 50), 
+        gender: Faker::Gender.binary_type, 
+        location: Faker::Address.city
+    )
+end
+
+Post.create!(
+    mood_rating: MOOD_RATING[rand(0..MOOD_RATING-1)], 
+    mood_length: MOOD_LENGTH[rand(0..MOOD_LENGTH-1)], 
+    mood_location: MOOD_LOCATION[rand(0..MOOD_LOCATION-1)], 
+    mood_trigger: "No" ,
+    mood_trigger_detail: "", 
+    mood_description: "I made the case for higher pay months ago and a raise finally came through", 
+    mood_purpose: "Give Support",  #binary
+    mood_title: "Got a raise!", 
+    mood_category: MOOD_LENGTH[rand(0..MOOD_LENGTH-2)], 
+    mood_category_detail: "", 
+    poster_id: user.id, 
+    poster_name: user.username
+)
+
+for User.all.each do |user|
+    Post.create!(
+        mood_rating: MOOD_RATING[rand(0..MOOD_RATING-1)], 
+        mood_length: MOOD_LENGTH[rand(0..MOOD_LENGTH-1)], 
+        mood_location: MOOD_LOCATION[rand(0..MOOD_LOCATION-1)], 
+        mood_trigger: "No" ,
+        mood_trigger_detail: "", 
+        mood_description: "I made the case for higher pay months ago and a raise finally came through", 
+        mood_purpose: "Give Support",  #binary
+        mood_title: "Got a raise!", 
+        mood_category: MOOD_LENGTH[rand(0..MOOD_LENGTH-2)], 
+        mood_category_detail: "", 
+        poster_id: user.id, 
+        poster_name: user.username
+    )
+end
+
+
+
 
 user1  = User.create!(username: "betty12345", password: Faker::Alphanumeric.alpha(number: 10), birthdate: Faker::Date.birthday(min_age: 25, max_age: 35), gender: "Female", location: "New York, NY")
 user2  = User.create!(username: "Alan54321", password: Faker::Alphanumeric.alpha(number: 10), birthdate: Faker::Date.birthday(min_age: 30, max_age: 40), gender: "Male", location: "Brooklyn, NY")
